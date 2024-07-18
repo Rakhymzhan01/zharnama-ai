@@ -1,0 +1,103 @@
+/* src/app/styles/Home.module.css */
+
+.hero {
+  display: flex;
+  flex-direction: column; /* Ensure vertical alignment */
+  align-items: center; /* Center align items horizontally */
+  justify-content: center; /* Center align items vertically */
+  height: 100vh; /* Full viewport height */
+  text-align: center;
+  padding: 2rem;
+}
+
+.heroText {
+  max-width: 600px;
+}
+
+.heroText h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.heroText p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  background-color: #2d2d44;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.input {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  outline: none;
+  color: white;
+  background-color: transparent;
+  font-size: 1rem;
+}
+
+.inputButton {
+  padding: 0.75rem;
+  background-color: #4e4e74;
+  border: none;
+  cursor: pointer;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align buttons */
+}
+
+.heroButton {
+  background-color: #8a2be2;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  margin-top: 10px;
+}
+
+.createManuallyButton {
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  margin-left: 20px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .heroText {
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  .heroImage {
+    width: 200px;
+    height: 200px;
+  }
+
+  .buttonContainer {
+    align-items: center;
+  }
+}
