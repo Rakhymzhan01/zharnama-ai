@@ -20,7 +20,7 @@ const Hero: React.FC = () => {
     const requestId = uuidv4();
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/gpt/parse-product', { url: productUrl });
+      const response = await axios.post('https://zharnama-ai-production.up.railway.app/api/gpt/parse-product', { url: productUrl });
       const data = { id: requestId, ...response.data };
       localStorage.setItem(`request_${requestId}`, JSON.stringify(data));
       router.push(`/edit-product?id=${requestId}`);

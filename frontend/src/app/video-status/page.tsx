@@ -25,7 +25,7 @@ const ChooseScript: React.FC = () => {
       localStorage.setItem('selectedScript', selectedScript);
       setIsLoading(true);
       try {
-        const response = await axios.post('http://localhost:5000/api/gpt/generate-video', {
+        const response = await axios.post('https://zharnama-ai-production.up.railway.app/api/gpt/generate-video', {
           script: selectedScript
         });
         const videoId = response.data.id;

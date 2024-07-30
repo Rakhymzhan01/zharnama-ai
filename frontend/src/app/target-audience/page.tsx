@@ -31,7 +31,7 @@ const TargetAudience = () => {
     setIsLoading(true);
     try {
       const productData = JSON.parse(localStorage.getItem('items') || '{}');
-      const response = await axios.post('http://localhost:5000/api/gpt/generate-scripts', {
+      const response = await axios.post('https://zharnama-ai-production.up.railway.app/api/gpt/generate-scripts', {
         targetAudience: audience,
         productInfo: productData
       });

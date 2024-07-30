@@ -1,44 +1,38 @@
-import React, { useContext } from 'react';
-import { ProductContext } from './ProductContext';
+import React, { createContext, useState, useContext, ReactNode } from 'react';
 
-const ProductDetails: React.FC = () => {
-  const context = useContext(ProductContext);
+interface ProductInfo {
+  name: string;
+  description: string;
+  audience: string;
+}
 
-  if (!context) {
-    throw new Error('ProductDetails must be used within a ProductProvider');
-  }
+interface ProductContextType {
+  productInfo: ProductInfo;
+  updateProductInfo: (key: keyof ProductInfo, value: string) => void;
+}
 
-  const { productInfo, updateProductInfo } = context;
+const ProductContext = createContext<ProductContextType | undefined>(undefined);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    updateProductInfo(e.target.name as keyof typeof productInfo, e.target.value);
+interface ProductProviderProps {
+  children: ReactNode;
+}
+
+const ProductProvider: React.FC<ProductProviderProps> = ({ children }) => {
+  const [productInfo, setProductInfo] = useState<ProductInfo>({
+    name: '',
+    description: '',
+    audience: ''
+  });
+
+  const updateProductInfo = (key: keyof ProductInfo, value: string) => {
+    setProductInfo((prevInfo) => ({ ...prevInfo, [key]: value }));
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        name="name"
-        value={productInfo.name}
-        onChange={handleChange}
-        placeholder="Product Name"
-      />
-      <input
-        type="text"
-        name="description"
-        value={productInfo.description}
-        onChange={handleChange}
-        placeholder="Product Description"
-      />
-      <input
-        type="text"
-        name="audience"
-        value={productInfo.audience}
-        onChange={handleChange}
-        placeholder="Target Audience"
-      />
-    </div>
+    <ProductContext.Provider value={{ productInfo, updateProductInfo }}>
+      {children}
+    </ProductContext.Provider>
   );
 };
 
-export default ProductDetails;
+export { ProductContext, ProductProvider };

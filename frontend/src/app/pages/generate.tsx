@@ -18,7 +18,7 @@ const Generate: React.FC = () => {
 
   const handleStartGenerating = async () => {
     try {
-      const response = await axios.post('/api/generate-video', { url: productUrl });
+      const response = await axios.post('https://zharnama-ai-production.up.railway.app/api/generate-video', { url: productUrl });
       updateProductInfo('name', response.data.name);
       updateProductInfo('description', response.data.description);
       router.push('/target-audience');
