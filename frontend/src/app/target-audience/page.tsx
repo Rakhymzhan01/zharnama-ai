@@ -2,11 +2,13 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 import styles from '../styles/TargetAudience.module.css';
 
 const TargetAudience = () => {
   const router = useRouter();
   const [audience, setAudience] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const suggestions = [
     "Pet owners",
     "Household cleaners",
@@ -25,8 +27,22 @@ const TargetAudience = () => {
     "Gadget lovers"
   ];
 
-  const handleNext = () => {
-    router.push('/choose-script');
+  const handleNext = async () => {
+    setIsLoading(true);
+    try {
+      const productData = JSON.parse(localStorage.getItem('items') || '{}');
+      const response = await axios.post('http://localhost:5000/api/gpt/generate-scripts', {
+        targetAudience: audience,
+        productInfo: productData
+      });
+      const scripts = response.data;
+      localStorage.setItem('scripts', JSON.stringify(scripts));
+      router.push('/choose-script');
+    } catch (error: any) {
+      console.error('Error generating scripts:', error.response ? error.response.data : error.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -54,9 +70,10 @@ const TargetAudience = () => {
           </div>
         ))}
       </div>
-      <button className={styles.button} onClick={handleNext}>
+      <button className={styles.button} onClick={handleNext} disabled={isLoading}>
         Next &rarr;
       </button>
+      {isLoading && <div className={styles.loader}></div>}
     </div>
   );
 };

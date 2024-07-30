@@ -1,4 +1,4 @@
-// pages/generate.tsx
+// frontend/src/app/generate/page.tsx
 'use client';
 
 import React, { useContext, useState } from 'react';
@@ -18,9 +18,11 @@ const Generate: React.FC = () => {
 
   const handleStartGenerating = async () => {
     try {
-      const response = await axios.post('/api/generate-video', { url: productUrl });
-      updateProductInfo('name', response.data.name);
-      updateProductInfo('description', response.data.description);
+      const response = await axios.post('/api/gpt/parse-product', { url: productUrl });
+      const { name, description, images } = response.data;
+      updateProductInfo('name', name);
+      updateProductInfo('description', description);
+      updateProductInfo('images', images);
       router.push('/target-audience');
     } catch (error: any) {
       console.error('Error generating video:', error.response ? error.response.data : error.message);

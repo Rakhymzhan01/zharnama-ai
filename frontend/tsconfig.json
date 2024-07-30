@@ -33,9 +33,9 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "**/*.css",
-    "src/app/pages/_app.tsx",
+    "src/app/_app.tsx",
     "build/types/**/*.ts"
-  ],
+, "src/app/components/Hero.tsx"  ],
   "exclude": [
     "node_modules"
   ]

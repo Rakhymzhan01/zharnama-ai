@@ -1,3 +1,4 @@
+// frontend/src/app/pages/generate.tsx
 'use client';
 
 import React, { useContext, useState } from 'react';

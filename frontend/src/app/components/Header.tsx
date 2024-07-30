@@ -4,7 +4,7 @@ import styles from '../styles/Header.module.css';
 const Header = () => {
   return (
     <header className={styles.header}>
-      <div className={styles.logo}>ZharamaAI</div>
+      <div className={styles.logo}>ZharnamaAI</div>
       <nav className={styles.nav}>
         <a href="#">Products</a>
         <a href="#">Tools</a>

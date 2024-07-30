@@ -1,17 +1,47 @@
-/* src/app/styles/Home.module.css */
+/* Existing styles */
+
+.loader {
+  margin-top: 10px;
+  width: 25px;
+  height: 50px;
+  display: grid;
+  color: #white;
+  background:
+    linear-gradient(currentColor 0 0) top/100% 2px,
+    radial-gradient(farthest-side at  top, #0000 calc(100% - 2px),currentColor calc(100% - 1px) ,#0000) top,
+    linear-gradient(currentColor 0 0) bottom/100% 2px,
+    radial-gradient(farthest-side at  bottom, #0000 calc(100% - 2px),currentColor calc(100% - 1px) ,#0000) bottom;
+  background-size: 100% 1px,100% 50%; 
+  background-repeat: no-repeat;
+  animation: l18 4s infinite linear;
+}
+.loader::before,
+.loader::after {
+  content: "";
+  grid-area: 1/1;
+  background: inherit;
+  border: inherit;
+  animation: inherit;
+}
+.loader::after {
+  animation-duration: 2s;
+}
+@keyframes l18 {
+  100% {transform: rotate(1turn)}
+}
 
 .hero {
   display: flex;
-  flex-direction: column; /* Ensure vertical alignment */
-  align-items: center; /* Center align items horizontally */
-  justify-content: center; /* Center align items vertically */
-  height: 100vh; /* Full viewport height */
-  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
   padding: 2rem;
 }
 
 .heroText {
+  flex: 1;
   max-width: 600px;
+  text-align: left;
 }
 
 .heroText h1 {
@@ -33,6 +63,7 @@
   margin-bottom: 1rem;
   width: 100%;
   max-width: 500px;
+  position: relative;
 }
 
 .input {
@@ -46,16 +77,22 @@
 }
 
 .inputButton {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
   padding: 0.75rem;
-  background-color: #4e4e74;
+  background-color: #8a2be2;
   border: none;
   cursor: pointer;
+  color: white;
+  border-radius: 0 0.5rem 0.5rem 0;
 }
 
 .buttonContainer {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center align buttons */
+  align-items: center;
 }
 
 .heroButton {
@@ -77,7 +114,20 @@
   cursor: pointer;
   font-size: 14px;
   text-decoration: underline;
-  margin-left: 20px;
+}
+
+.heroVideo {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video {
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 /* Responsive styles */
@@ -89,15 +139,14 @@
 
   .heroText {
     max-width: 100%;
-    margin-left: 0;
   }
 
-  .heroImage {
-    width: 200px;
-    height: 200px;
+  .heroVideo {
+    margin-top: 20px;
   }
 
-  .buttonContainer {
-    align-items: center;
+  .video {
+    width: 300px;
+    height: 300px;
   }
 }
