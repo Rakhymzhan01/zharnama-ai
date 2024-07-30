@@ -1,14 +1,19 @@
+// src/index.ts
 import express from 'express';
-import gptRouter from './gpt/gpt-router';
-import { config } from './config';
-import { logger } from './logger';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import globalRouter from './global-router';
+import callbackRouter from './routes/callback';
 
 const app = express();
-const PORT = config.PORT || 5000;
+const port = process.env.PORT || 5000;
 
-app.use(express.json());
-app.use('/api/gpt', gptRouter);
+app.use(bodyParser.json());
+app.use(cors());
 
-app.listen(PORT, () => {
-  logger.info(`Server is running on port ${PORT}`);
+app.use('/api', callbackRouter); // Add the callback router under the '/api' path
+app.use(globalRouter);
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
